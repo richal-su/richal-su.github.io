@@ -19,42 +19,70 @@
 
     <nav class="tabs">
         <div class="tab-item active" data-tab="all">Для вас</div>
-        <div class="tab-item" data-tab="favorites">
-            Избранное <i class="fa-solid fa-heart" style="font-size: 10px; margin-left: 4px;"></i>
-        </div>
+        <div class="tab-item" data-tab="favorites">Избранное</div>
     </nav>
 
-    <main id="trackList" class="content-area">
-        <div class="loader-placeholder">Загрузка библиотеки...</div>
-    </main>
+    <main id="trackList" class="content-area"></main>
 
-    <footer class="player-widget">
-        <div class="progress-container" id="progressContainer">
-            <div class="progress-bar" id="progressBar"></div>
+    <footer class="player-widget" id="miniPlayer">
+        <div class="progress-container" id="miniProgressContainer">
+            <div class="progress-bar" id="miniProgressBar"></div>
         </div>
-        
-        <div class="player-body">
-            <div class="current-info" id="currentTrackInfo">
-                <img src="https://placehold.co/100x100/2c2c2e/white?text=..." alt="Cover" id="playerCover" class="mini-cover">
+        <div class="player-body clickable-area">
+            <div class="current-info">
+                <img src="" alt="" id="playerCover" class="mini-cover">
                 <div class="text-meta">
-                    <div id="playerTitle" class="title">Не выбрано</div>
-                    <div id="playerArtist" class="artist">Нажмите на трек</div>
+                    <div id="playerTitle" class="title">Загрузка...</div>
+                    <div id="playerArtist" class="artist">Выберите трек</div>
                 </div>
             </div>
-
             <div class="player-controls">
-                <button id="prevBtn" class="btn-icon">
-                    <i class="fa-solid fa-backward-step"></i>
-                </button>
-                <button id="playPauseBtn" class="btn-icon play-main">
-                    <i class="fa-solid fa-play"></i>
-                </button>
-                <button id="nextBtn" class="btn-icon">
-                    <i class="fa-solid fa-forward-step"></i>
-                </button>
+                <button id="playPauseBtn" class="btn-icon play-main"><i class="fa-solid fa-play"></i></button>
             </div>
         </div>
     </footer>
+
+    <div id="fullPlayer" class="full-player">
+        <header class="full-player-header">
+            <button id="closeFullPlayer" class="btn-icon"><i class="fa-solid fa-chevron-down"></i></button>
+            <span class="now-playing-label">Сейчас играет</span>
+            <button id="moreOptionsBtn" class="btn-icon"><i class="fa-solid fa-ellipsis"></i></button>
+        </header>
+
+        <div class="full-player-content">
+            <div class="big-cover-container">
+                <img src="" alt="" id="fullCover" class="big-cover">
+            </div>
+
+            <div class="full-track-info">
+                <div class="full-meta">
+                    <h2 id="fullTitle">Название трека</h2>
+                    <p id="fullArtist">Исполнитель</p>
+                </div>
+                <button id="fullFavBtn" class="fav-btn-large">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+            </div>
+
+            <div class="full-controls-group">
+                <div class="full-progress-wrapper">
+                    <div class="full-progress-container" id="fullProgressContainer">
+                        <div class="full-progress-bar" id="fullProgressBar"></div>
+                    </div>
+                    <div class="time-info">
+                        <span id="currentTime">0:00</span>
+                        <span id="totalTime">0:00</span>
+                    </div>
+                </div>
+
+                <div class="main-controls">
+                    <button id="fullPrevBtn" class="btn-icon"><i class="fa-solid fa-backward-step"></i></button>
+                    <button id="fullPlayPauseBtn" class="play-btn-big"><i class="fa-solid fa-play"></i></button>
+                    <button id="fullNextBtn" class="btn-icon"><i class="fa-solid fa-forward-step"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="app.js"></script>
 </body>
