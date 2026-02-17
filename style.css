@@ -1,0 +1,195 @@
+:root {
+    --bg: #000000;
+    --secondary-bg: #1c1c1e;
+    --text: #ffffff;
+    --hint: #8e8e93;
+    --accent: #248bfe; /* Синий как в ТГ */
+    --safe-area-bottom: env(safe-area-inset-bottom);
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    font-family: -apple-system, system-ui, sans-serif;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Header & Search */
+.app-header {
+    padding: 12px 16px;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 10;
+}
+
+.search-box {
+    background: var(--secondary-bg);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+}
+
+.search-box input {
+    background: none;
+    border: none;
+    color: white;
+    margin-left: 8px;
+    width: 100%;
+    font-size: 16px;
+    outline: none;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    padding: 0 16px;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.tab-item {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--hint);
+    padding-bottom: 8px;
+}
+
+.tab-item.active {
+    color: var(--text);
+    border-bottom: 2px solid var(--accent);
+}
+
+/* Track List */
+.content-area {
+    padding: 0 16px 120px;
+}
+
+.track-card {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 0.5px solid #2c2c2e;
+}
+
+.track-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 6px;
+    object-fit: cover;
+    margin-right: 12px;
+}
+
+.track-details { flex: 1; min-width: 0; }
+.track-name { font-size: 16px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.track-author { font-size: 13px; color: var(--hint); }
+
+.fav-btn {
+    padding: 10px;
+    background: none;
+    border: none;
+    color: var(--hint);
+    font-size: 18px;
+}
+
+.fav-btn.active { color: #ff3b30; }
+
+/* Equalizer logic - теперь фиксированный */
+.equalizer {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 14px;
+    margin-left: 10px;
+}
+
+.equalizer span {
+    width: 3px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 1px;
+}
+
+/* Анимация работает только при классе .animating */
+.equalizer.animating span {
+    animation: bounce 0.8s infinite ease-in-out;
+}
+.equalizer span:nth-child(2) { animation-delay: 0.2s; }
+.equalizer span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+    0%, 100% { height: 4px; }
+    50% { height: 14px; }
+}
+
+/* Player Widget */
+.player-widget {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: rgba(28, 28, 30, 0.95);
+    backdrop-filter: blur(15px);
+    border-top: 0.5px solid #38383a;
+    padding-bottom: calc(var(--safe-area-bottom) + 10px);
+}
+
+.progress-container {
+    width: 100%;
+    height: 2px;
+    background: #38383a;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background: var(--accent);
+}
+
+.player-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+}
+
+.current-info { display: flex; align-items: center; flex: 1; }
+.mini-cover { width: 40px; height: 40px; border-radius: 4px; margin-right: 10px; background: #333; }
+
+.player-controls { display: flex; align-items: center; gap: 20px; }
+.btn-icon { background: none; border: none; color: white; font-size: 20px; }
+.play-main { font-size: 24px; width: 30px; }
+
+/* ... (весь предыдущий код остается) ... */
+
+/* Добавляем указатель для кнопок и интерактивных зон */
+.tab-item, 
+.track-card, 
+.fav-btn, 
+.btn-icon, 
+.progress-container, 
+.current-info,
+.search-box i {
+    cursor: pointer;
+}
+
+/* Стилизация прогресс-бара для удобства перемотки */
+.progress-container {
+    width: 100%;
+    height: 4px; /* Чуть увеличил высоту для удобства клика */
+    background: #38383a;
+    transition: height 0.2s;
+}
+
+.progress-container:hover {
+    height: 6px; /* Визуальный отклик при наведении */
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background: var(--accent);
+    pointer-events: none; /* Чтобы клик пролетал сквозь прогресс на контейнер */
+}
